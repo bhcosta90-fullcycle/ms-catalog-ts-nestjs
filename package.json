@@ -1,0 +1,22 @@
+{
+  "name": "ms-catalog-ts-nestjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhcosta90-fullcycle/ms-catalog-ts-nestjs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bhcosta90-fullcycle/ms-catalog-ts-nestjs/issues"
+  },
+  "homepage": "https://github.com/bhcosta90-fullcycle/ms-catalog-ts-nestjs#readme",
+  "devDependencies": {
+    "husky": "^8.0.3"
+  }
+}
