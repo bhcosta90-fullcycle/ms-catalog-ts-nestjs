@@ -55,6 +55,12 @@ export class Category extends EntityAbstract<CategoryProps>{
         return this._name;
     }
 
+    update(props: Pick<CategoryProps, "name" | "description">) {
+        this._name = props.name;
+        this._description = props.description;
+        Category.validate(this)
+    }
+
     get description(): string | null {
         return this._description;
     }

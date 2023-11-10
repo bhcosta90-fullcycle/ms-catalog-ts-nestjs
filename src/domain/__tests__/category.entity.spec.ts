@@ -49,6 +49,12 @@ describe("Category Unit Test", () => {
                 $category.disable()
                 expect($category.is_active).toBeFalsy();
             })
+
+            test("Change name and description with method update", () => {
+                $category.update({name: 'testing update', description: 'testing description update'});
+                expect($category.name).toBe('testing update');
+                expect($category.description).toBe('testing description update');
+            })
         })
     })
 
