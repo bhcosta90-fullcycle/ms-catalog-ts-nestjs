@@ -48,7 +48,6 @@ export class Category extends EntityAbstract<CategoryProps>{
         return this;
     }
 
-
     get name(): string {
         return this._name;
     }
