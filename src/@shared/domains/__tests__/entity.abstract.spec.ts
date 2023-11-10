@@ -1,6 +1,6 @@
 import {EntityAbstract} from "../entity.abstract";
 import { validate as uuidValidate } from "uuid";
-import {UniqueId} from "../../vo/unique-id.vo";
+import {UniqueId} from "../vo/unique-id.vo";
 
 class StubEntity extends EntityAbstract<{ prop1: string; prop2: number }> {
     constructor(props: {prop1: string; prop2: number}) {

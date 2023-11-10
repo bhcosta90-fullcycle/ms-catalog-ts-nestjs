@@ -1,4 +1,4 @@
-import {UniqueId} from "../vo/unique-id.vo";
+import {UniqueId} from "./vo/unique-id.vo";
 
 export interface EntityInterface<Props = any> {
     get id(): UniqueId;

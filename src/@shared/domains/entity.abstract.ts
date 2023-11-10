@@ -1,6 +1,6 @@
 import {EntityInterface} from "./entity.interface";
 import {randomUUID} from 'crypto'
-import {UniqueId} from "../vo/unique-id.vo";
+import {UniqueId} from "./vo/unique-id.vo";
 
 export abstract class EntityAbstract<PropsConstructor = any> implements EntityInterface<PropsConstructor> {
     protected _id: UniqueId;

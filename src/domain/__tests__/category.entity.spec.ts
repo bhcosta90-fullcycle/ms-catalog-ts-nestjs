@@ -1,6 +1,6 @@
 import {Category} from "../category.entity";
-import {UniqueId} from "../../@shared/vo/unique-id.vo";
-import {EntityValidationError} from "../../@shared/validators/validation.error";
+import {UniqueId} from "../../@shared/domains/vo/unique-id.vo";
+import {EntityValidationError} from "../../@shared/domains/validators/validation.error";
 
 describe("Category Unit Test", () => {
     describe("Constructor", () => {

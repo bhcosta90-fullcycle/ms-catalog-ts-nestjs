@@ -1,6 +1,6 @@
 import {EntityAbstract, EntityProps} from "../@shared/domains/entity.abstract";
 import {CategoryValidatorFactory} from "./category.validator";
-import {EntityValidationError} from "../@shared/validators/validation.error";
+import {EntityValidationError} from "../@shared/domains/validators/validation.error";
 
 export type CategoryProps = {
     name: string;
