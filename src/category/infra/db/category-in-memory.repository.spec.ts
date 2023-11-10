@@ -27,25 +27,24 @@ describe("CategoryInMemoryRepository", () => {
         expect(itemsFiltered).toStrictEqual([items[0], items[1]]);
     });
 
-    // TODO
-    // it("should sort by created_at when sort param is null", async () => {
-    //     const created_at = new Date();
-    //
-    //     const items = [
-    //         new Category({ name: "test", created_at: created_at.toString() }),
-    //         new Category({
-    //             name: "TEST",
-    //             created_at: new Date(created_at.getTime() + 100).toString(),
-    //         }),
-    //         new Category({
-    //             name: "fake",
-    //             created_at: new Date(created_at.getTime() + 200).toString(),
-    //         }),
-    //     ];
-    //
-    //     const itemsSorted = await repository["applySort"](items, null, null);
-    //     expect(itemsSorted).toStrictEqual([items[2], items[1], items[0]]);
-    // });
+    it("should sort by created_at when sort param is null", async () => {
+        const created_at = new Date();
+
+        const items = [
+            new Category({ name: "test", created_at: created_at }),
+            new Category({
+                name: "TEST",
+                created_at: new Date(created_at.getTime() + 100),
+            }),
+            new Category({
+                name: "fake",
+                created_at: new Date(created_at.getTime() + 200),
+            }),
+        ];
+
+        const itemsSorted = await repository["applySort"](items, null, null);
+        expect(itemsSorted).toStrictEqual([items[2], items[1], items[0]]);
+    });
 
     it("should sort by name", async () => {
         const items = [
