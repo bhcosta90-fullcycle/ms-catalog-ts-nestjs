@@ -9,8 +9,8 @@ export abstract class EntityAbstract<PropsConstructor = any> implements EntityIn
 
     protected constructor(protected readonly props: PropsConstructor & EntityProps) {
         this._id = new UniqueId(this.props.id);
-        this._created_at = new Date(this.props.created_at);
-        this._updated_at = new Date(this.props.updated_at);
+        this._created_at = this.props.created_at ?? new Date();
+        this._updated_at = this.props.updated_at ?? new Date();
     }
 
     get id(): UniqueId {
@@ -36,6 +36,6 @@ export abstract class EntityAbstract<PropsConstructor = any> implements EntityIn
 
 export type EntityProps = {
     id?: string | null;
-    created_at?: string | null;
-    updated_at?: string | null;
+    created_at?: Date | null;
+    updated_at?: Date | null;
 };
