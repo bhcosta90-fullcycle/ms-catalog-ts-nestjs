@@ -12,6 +12,7 @@ describe("CategoryInMemoryRepository", () => {
         const itemsFiltered = await repository["applyFilter"](items, null);
         expect(filterSpy).not.toHaveBeenCalled();
         expect(itemsFiltered).toStrictEqual(items);
+        expect(repository.getEntity()).toBe(Category)
     });
 
     it("should filter items using filter parameter", async () => {
