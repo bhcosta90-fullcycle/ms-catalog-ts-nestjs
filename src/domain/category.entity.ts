@@ -1,20 +1,19 @@
-import {randomUUID} from 'crypto'
 import {EntityAbstract, EntityProps} from "../@shared/domains/entity.abstract";
+import {CategoryValidatorFactory} from "./category.validator";
+import {EntityValidationError} from "../@shared/validators/validation.error";
 
 export type CategoryProps = {
     name: string;
     description?: string | null;
     is_active?: boolean;
-} & EntityProps
-
-export type CategoryCreateCommand = Omit<CategoryProps, "id" | "created_at" | "updated_at">
+}
 
 export class Category extends EntityAbstract<CategoryProps>{
     private _name: string;
     private _description?: string | null;
     private _is_active: boolean;
 
-    constructor(props: CategoryProps) {
+    constructor(props: CategoryProps & EntityProps) {
         super(props);
 
         this._name = props.name;
@@ -22,18 +21,22 @@ export class Category extends EntityAbstract<CategoryProps>{
         this._is_active = props.is_active ?? true;
     }
 
-    static create(props: CategoryCreateCommand) {
-        return new Category(props);
+    static create(props: CategoryProps) {
+        const category = new Category(props);
+        Category.validate(category);
+        return category;
     }
 
     changeName(name: string): this {
         this._name = name;
+        Category.validate(this)
         return this;
     }
 
 
     changeDescription(description: string): this {
         this._description = description;
+        Category.validate(this)
         return this;
     }
 
@@ -58,5 +61,15 @@ export class Category extends EntityAbstract<CategoryProps>{
 
     get is_active(): boolean {
         return this._is_active;
+    }
+
+    static validate(entity: Category) {
+        const validator = CategoryValidatorFactory.create()
+        const isValid = validator.validate(entity)
+
+        if (!isValid) {
+            console.log(validator.errors)
+            throw new EntityValidationError(validator.errors);
+        }
     }
 }

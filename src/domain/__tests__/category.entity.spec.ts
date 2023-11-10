@@ -1,12 +1,17 @@
 import {Category} from "../category.entity";
 import {UniqueId} from "../../@shared/vo/unique-id.vo";
+import {EntityValidationError} from "../../@shared/validators/validation.error";
 
 describe("Category Unit Test", () => {
     describe("Constructor", () => {
         let $category: Category;
+        let $validateSpy: any;
 
         beforeEach(() => {
+            $validateSpy = jest.spyOn(Category, "validate");
+
             $category = Category.create({name: 'testing'});
+            expect($validateSpy).toHaveBeenCalledTimes(1)
         })
 
         test("Checking if you have the id and created_at assigned", () => {
@@ -21,12 +26,14 @@ describe("Category Unit Test", () => {
         test("Change name field in to category", () => {
             expect($category.name).toBe("testing");
             $category.changeName('testing 2');
+            expect($validateSpy).toHaveBeenCalledTimes(2)
             expect($category.name).toBe("testing 2");
         })
 
         test("Change description field in to category", () => {
             expect($category.description).toBe(null);
             $category.changeDescription('testing');
+            expect($validateSpy).toHaveBeenCalledTimes(2)
             expect($category.description).toBe("testing");
         })
 
@@ -35,6 +42,7 @@ describe("Category Unit Test", () => {
                 const $category: Category = Category.create({name: 'testing', is_active: false});
                 expect($category.is_active).toBeFalsy();
                 $category.enable()
+                expect($validateSpy).toHaveBeenCalledTimes(2)
                 expect($category.is_active).toBeTruthy();
             })
 
@@ -59,5 +67,16 @@ describe("Category Unit Test", () => {
             const $category: Category = new Category(arrange);
             expect($category.toJSON()).toStrictEqual(arrange);
         })
+    });
+})
+
+describe("Category Validator Unit Test", () => {
+    test('create command', () => {
+
+        expect(() => Category.create({
+            name: null,
+        })).toThrow(new EntityValidationError({
+            name: ["name is required"],
+        }))
     });
 })
