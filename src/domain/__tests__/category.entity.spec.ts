@@ -1,6 +1,5 @@
 import {Category} from "../category.entity";
 import {UniqueId} from "../../@shared/domains/vo/unique-id.vo";
-import {EntityValidationError} from "../../@shared/domains/validators/validation.error";
 
 describe("Category Unit Test", () => {
     describe("Constructor", () => {
@@ -71,12 +70,49 @@ describe("Category Unit Test", () => {
 })
 
 describe("Category Validator Unit Test", () => {
-    test('create command', () => {
-
+    test('should an invalid category with name property', () => {
         expect(() => Category.create({
             name: null,
-        })).toThrow(new EntityValidationError({
-            name: ["name is required"],
-        }))
+        })).containsErrorMessages({
+            name: [
+                "name should not be empty",
+                "name must be a string",
+                "name must be shorter than or equal to 255 characters",
+            ],
+        });
+
+        expect(() => Category.create({ name: "" })).containsErrorMessages({
+            name: ["name should not be empty"],
+        });
+
+        expect(() => Category.create({ name: 5 as any })).containsErrorMessages({
+            name: [
+                "name must be a string",
+                "name must be shorter than or equal to 255 characters",
+            ],
+        });
+
+        expect(() =>
+            Category.create({ name: "t".repeat(256) })
+        ).containsErrorMessages({
+            name: ["name must be shorter than or equal to 255 characters"],
+        });
+    });
+
+    test('should an invalid category with description property', () => {
+        expect(() =>
+            Category.create({ description: 5 } as any)
+        ).containsErrorMessages({
+            description: [
+                "description must be a string",
+                "description must be shorter than or equal to 10000 characters"
+            ],
+        });
+
+        expect(() =>
+            Category.create({ description: "t".repeat(10001) } as any)
+        ).containsErrorMessages({
+            description: ["description must be shorter than or equal to 10000 characters"],
+        });
     });
 })

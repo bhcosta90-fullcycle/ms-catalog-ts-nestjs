@@ -68,7 +68,6 @@ export class Category extends EntityAbstract<CategoryProps>{
         const isValid = validator.validate(entity)
 
         if (!isValid) {
-            console.log(validator.errors)
             throw new EntityValidationError(validator.errors);
         }
     }
