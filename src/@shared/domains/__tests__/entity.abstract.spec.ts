@@ -1,4 +1,6 @@
 import {EntityAbstract} from "../entity.abstract";
+import { validate as uuidValidate } from "uuid";
+import {UniqueId} from "../../vo/unique-id.vo";
 
 class StubEntity extends EntityAbstract<{ prop1: string; prop2: number }> {
     constructor(props: {prop1: string; prop2: number}) {
@@ -11,6 +13,8 @@ describe("Entity Unit Tests", () => {
         const arrange = {prop1: "prop1 value", prop2: 10};
         const entity = new StubEntity(arrange);
         expect(entity['props']).toStrictEqual(arrange);
+        expect(entity['_id']).toBeInstanceOf(UniqueId);
+        expect(uuidValidate(entity.id)).toBeTruthy();
     });
 
     it("should convert an entity to a JavaScript Object", () => {
