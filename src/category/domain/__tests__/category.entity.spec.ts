@@ -1,5 +1,5 @@
 import {Category} from "../category.entity";
-import {UniqueId} from "../../@shared/domains/vo/unique-id.vo";
+import {UniqueId} from "../../../@shared/domains/vo/unique-id.vo";
 
 describe("Category Unit Test", () => {
     describe("Constructor", () => {
