@@ -10,16 +10,16 @@ export type CategoryProps = {
 export type CategoryCreateCommand = Pick<CategoryProps, "name" | "description" | "is_active">
 
 export class Category extends EntityAbstract<CategoryProps>{
-    public name: string;
-    public description?: string | null;
-    public is_active: boolean;
+    private _name: string;
+    private _description?: string | null;
+    private _is_active: boolean;
 
     constructor(props: CategoryProps) {
         super(props);
 
-        this.name = props.name;
-        this.description = props.description ?? null;
-        this.is_active = props.is_active ?? true;
+        this._name = props.name;
+        this._description = props.description ?? null;
+        this._is_active = props.is_active ?? true;
     }
 
     static create(props: CategoryCreateCommand) {
@@ -27,24 +27,37 @@ export class Category extends EntityAbstract<CategoryProps>{
     }
 
     changeName(name: string): this {
-        this.name = name;
+        this._name = name;
         return this;
     }
 
 
     changeDescription(description: string): this {
-        this.description = description;
+        this._description = description;
         return this;
     }
 
     enable(): this {
-        this.is_active = true;
+        this._is_active = true;
         return this;
     }
 
 
     disable(): this {
-        this.is_active = false;
+        this._is_active = false;
         return this;
+    }
+
+
+    get name(): string {
+        return this._name;
+    }
+
+    get description(): string | null {
+        return this._description;
+    }
+
+    get is_active(): boolean {
+        return this._is_active;
     }
 }

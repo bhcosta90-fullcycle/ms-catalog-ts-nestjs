@@ -6,7 +6,7 @@
   "scripts": {
     "prepare": "husky install",
     "test": "jest",
-    "test:cover": "npm run test -- --coverage"
+    "test:cov": "npm run test -- --coverage"
   },
   "repository": {
     "type": "git",

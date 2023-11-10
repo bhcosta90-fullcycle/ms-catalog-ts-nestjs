@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run test:cover -- --silent --maxWorkers=10
+npm run test:cov -- --silent --maxWorkers=10
