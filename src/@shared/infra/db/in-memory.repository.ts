@@ -4,7 +4,7 @@ import {ValueObjectAbstract} from "../../domains/vo/abstracts/value-object.abstr
 import {NotFoundError} from "../../domains/exceptions/not-found.error";
 
 export abstract class InMemoryRepository<E extends EntityInterface, EntityId extends ValueObjectAbstract> implements IRepository<E, EntityId> {
-    protected items: E[] = [];
+    items: E[] = [];
 
     async bulkInsert(entities: E[]): Promise<void> {
         this.items.push(...entities);
@@ -20,8 +20,8 @@ export abstract class InMemoryRepository<E extends EntityInterface, EntityId ext
     }
 
     async findById(id: EntityId): Promise<E> {
-        const item = this.items.find((item) => item.id as any == id)
-        return typeof item === "undefined" ? null : item
+        const indexFound = this._getId(id);
+        return this.items[indexFound];
     }
 
     async insert(entity: E): Promise<void> {
@@ -34,12 +34,12 @@ export abstract class InMemoryRepository<E extends EntityInterface, EntityId ext
     }
 
     private _getId(id: ValueObjectAbstract): number {
-        const indexFound: number = this.items.findIndex((item) => item.id as any == id)
+        const indexFound: number = this.items.findIndex((item) => item.id.toString() == id.toString())
         if (indexFound === -1) {
             throw new NotFoundError(id, this.getEntity());
         }
         return indexFound;
     }
 
-    abstract getEntity(): { new(...args: any[]): E };
+    abstract getEntity(): new (...args: any[]) => E;
 }

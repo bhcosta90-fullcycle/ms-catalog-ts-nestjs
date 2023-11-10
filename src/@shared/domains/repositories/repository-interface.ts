@@ -14,5 +14,5 @@ export interface IRepository<E extends EntityInterface, EntityId extends ValueOb
 
     findAll(): Promise<E[]>
 
-    getEntity(): new (...args: any[]) => E
+    getEntity(): new (...args: any[]) => E;
 }
