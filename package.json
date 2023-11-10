@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prepare": "husky install",
+    "tsc": "tsc",
     "test": "jest",
     "test:cov": "npm run test -- --coverage"
   },
@@ -30,6 +31,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "class-validator": "^0.14.0",
     "uuid": "^9.0.1"
   }
 }
