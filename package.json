@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prepare": "husky install",
+    "tsc": "tsc",
     "test": "jest",
     "test:cov": "npm run test -- --coverage"
   },

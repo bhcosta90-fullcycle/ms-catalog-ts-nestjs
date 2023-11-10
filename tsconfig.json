@@ -16,7 +16,7 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "allowJs": true,
-    "rootDir": "./src/",
+    //"rootDir": "./src/",
     "sourceMap": true,
     "declarationMap": true
   }
