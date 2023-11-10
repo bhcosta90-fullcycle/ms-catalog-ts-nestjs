@@ -1,5 +1,3 @@
-import {ValueObjectAbstract} from "../vo/abstracts/value-object.abstract";
-
 export type SortDirection = 'asc' | 'desc';
 
 export type SearchParamsConstructorProps<Filter = string> = {
@@ -10,7 +8,7 @@ export type SearchParamsConstructorProps<Filter = string> = {
     filter?: Filter | null;
 };
 
-export class SearchParams<Filter = string> extends ValueObjectAbstract {
+export class SearchParams<Filter = string> {
     protected _page: number;
     protected _per_page: number = 15;
     protected _sort: string | null;
@@ -18,7 +16,6 @@ export class SearchParams<Filter = string> extends ValueObjectAbstract {
     protected _filter: Filter | null;
 
     constructor(props: SearchParamsConstructorProps<Filter> = {}) {
-        super(props);
         this.page = props.page;
         this.per_page = props.per_page;
         this.sort = props.sort;

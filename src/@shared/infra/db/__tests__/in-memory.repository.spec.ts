@@ -1,7 +1,7 @@
-import { InMemoryRepository } from "./in-memory.repository";
-import {EntityAbstract, EntityProps} from "../../domains/entity.abstract";
-import { UniqueId } from "../../domains/vo/unique-id.vo";
-import {NotFoundError} from "../../domains/exceptions/not-found.error";
+import {InMemoryRepository} from "../in-memory.repository";
+import {EntityAbstract, EntityProps} from "../../../domains/entity.abstract";
+import {UniqueId} from "../../../domains/vo/unique-id.vo";
+import {NotFoundError} from "../../../domains/exceptions/not-found.error";
 
 type StubEntityConstructor = {
   name: string;

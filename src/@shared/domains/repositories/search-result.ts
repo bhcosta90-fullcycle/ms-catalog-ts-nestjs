@@ -1,4 +1,3 @@
-import {ValueObjectAbstract} from "../vo/abstracts/value-object.abstract";
 import {EntityInterface} from "../entity.interface";
 
 type SearchResultConstructorProps<E extends EntityInterface> = {
@@ -8,7 +7,7 @@ type SearchResultConstructorProps<E extends EntityInterface> = {
     per_page: number;
 };
 
-export class SearchResult<A extends EntityInterface = EntityInterface> extends ValueObjectAbstract {
+export class SearchResult<A extends EntityInterface = EntityInterface> {
     readonly items: A[];
     readonly total: number;
     readonly current_page: number;
@@ -16,7 +15,6 @@ export class SearchResult<A extends EntityInterface = EntityInterface> extends V
     readonly last_page: number;
 
     constructor(props: SearchResultConstructorProps<A>) {
-        super(props);
         this.items = props.items;
         this.total = props.total;
         this.current_page = props.current_page;

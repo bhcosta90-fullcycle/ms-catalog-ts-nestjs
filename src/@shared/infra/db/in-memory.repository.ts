@@ -1,11 +1,14 @@
-import {IRepository, ISearchableRepository} from "../../domains/repositories/repository-interface";
+import {IRepository, ISearchableRepository,} from "../../domains/repositories/repository-interface";
 import {EntityInterface} from "../../domains/entity.interface";
 import {ValueObjectAbstract} from "../../domains/vo/abstracts/value-object.abstract";
 import {NotFoundError} from "../../domains/exceptions/not-found.error";
-import {SearchParams, SortDirection} from "../../domains/repositories/search-params";
+import {SearchParams, SortDirection,} from "../../domains/repositories/search-params";
 import {SearchResult} from "../../domains/repositories/search-result";
 
-export abstract class InMemoryRepository<E extends EntityInterface, EntityId extends ValueObjectAbstract> implements IRepository<E, EntityId> {
+export abstract class InMemoryRepository<
+    E extends EntityInterface,
+    EntityId extends ValueObjectAbstract
+> implements IRepository<E, EntityId> {
     items: E[] = [];
 
     async bulkInsert(entities: E[]): Promise<void> {
@@ -18,7 +21,7 @@ export abstract class InMemoryRepository<E extends EntityInterface, EntityId ext
     }
 
     async findAll(): Promise<E[]> {
-        return this.items
+        return this.items;
     }
 
     async findById(id: EntityId): Promise<E> {
@@ -32,11 +35,13 @@ export abstract class InMemoryRepository<E extends EntityInterface, EntityId ext
 
     async update(entity: E): Promise<void> {
         const indexFound = this._getId(entity.id);
-        this.items[indexFound] = entity
+        this.items[indexFound] = entity;
     }
 
     private _getId(id: ValueObjectAbstract): number {
-        const indexFound: number = this.items.findIndex((item) => item.id.toString() == id.toString())
+        const indexFound: number = this.items.findIndex(
+            (item) => item.id.toString() == id.toString()
+        );
         if (indexFound === -1) {
             throw new NotFoundError(id, this.getEntity());
         }
@@ -46,7 +51,13 @@ export abstract class InMemoryRepository<E extends EntityInterface, EntityId ext
     abstract getEntity(): new (...args: any[]) => E;
 }
 
-export abstract class InMemorySearchRepository<E extends EntityInterface, EntityId extends ValueObjectAbstract, Filter = string> extends InMemoryRepository<E, EntityId> implements ISearchableRepository<E, EntityId, Filter>{
+export abstract class InMemorySearchRepository<
+    E extends EntityInterface,
+    EntityId extends ValueObjectAbstract,
+    Filter = string
+>
+    extends InMemoryRepository<E, EntityId>
+    implements ISearchableRepository<E, EntityId, Filter> {
     sortableFields: string[];
 
     async search(props: SearchParams<Filter>): Promise<SearchResult> {
@@ -91,17 +102,22 @@ export abstract class InMemorySearchRepository<E extends EntityInterface, Entity
         items: E[],
         sort: string | null,
         sort_dir: SortDirection | null,
-        custom_getter?: (sort: string, item: E) => any
+        // custom_getter?: (sort: string, item: E) => any
     ) {
         if (!sort || !this.sortableFields.includes(sort)) {
             return items;
         }
 
         return [...items].sort((a, b) => {
+
             //@ts-ignore
-            const aValue = custom_getter ? custom_getter(sort, a) : a[sort];
+            // const aValue = custom_getter ? custom_getter(sort, a) : a[sort];
+            const aValue = a[sort];
+
             //@ts-ignore
-            const bValue = custom_getter ? custom_getter(sort, b) : b[sort];
+            // const bValue = custom_getter ? custom_getter(sort, b) : b[sort];
+            const bValue = b[sort];
+
             if (aValue < bValue) {
                 return sort_dir === "asc" ? -1 : 1;
             }
