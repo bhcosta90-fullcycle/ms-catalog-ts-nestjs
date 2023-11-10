@@ -1,4 +1,5 @@
 import {Category} from "../category.entity";
+import {UniqueId} from "../../@shared/vo/unique-id.vo";
 
 describe("Category Unit Test", () => {
     let $category: Category;
@@ -9,6 +10,7 @@ describe("Category Unit Test", () => {
 
     test("Checking if you have the id and created_at assigned", () => {
         expect($category.id).not.toBeNull();
+        expect($category.id).toBeInstanceOf(UniqueId);
         expect($category.created_at).toBeInstanceOf(Date)
         expect($category.updated_at).toBeInstanceOf(Date)
         expect($category.is_active).toBeTruthy();
@@ -39,5 +41,19 @@ describe("Category Unit Test", () => {
             $category.disable()
             expect($category.is_active).toBeFalsy();
         })
+    })
+
+    test("Creating a new category passing all fields", () => {
+        const arrange = {
+            description: 'testing',
+            name: 'testing',
+            is_active: false,
+            id: '1495f958-7fda-11ee-b962-0242ac120002',
+            created_at: '2020-01-01 00:00:00',
+            updated_at: '2020-01-02 00:00:00',
+        };
+
+        const $category: Category = new Category(arrange);
+        expect($category.toJSON()).toStrictEqual(arrange);
     })
 })

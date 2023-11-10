@@ -1,13 +1,13 @@
 import {randomUUID} from 'crypto'
-import {EntityAbstract} from "../@shared/domains/entity.abstract";
+import {EntityAbstract, EntityProps} from "../@shared/domains/entity.abstract";
 
 export type CategoryProps = {
     name: string;
     description?: string | null;
     is_active?: boolean;
-}
+} & EntityProps
 
-export type CategoryCreateCommand = CategoryProps
+export type CategoryCreateCommand = Omit<CategoryProps, "id" | "created_at" | "updated_at">
 
 export class Category extends EntityAbstract<CategoryProps>{
     private _name: string;
