@@ -10,6 +10,7 @@ describe("Category Unit Test", () => {
     test("Checking if you have the id and created_at assigned", () => {
         expect($category.id).not.toBeNull();
         expect($category.created_at).toBeInstanceOf(Date)
+        expect($category.update_at).toBeInstanceOf(Date)
         expect($category.is_active).toBeTruthy();
         expect($category.description).toBeNull();
     })

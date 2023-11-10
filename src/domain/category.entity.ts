@@ -1,28 +1,25 @@
 import {randomUUID} from 'crypto'
+import {EntityAbstract} from "../@shared/domains/entity.abstract";
 
 export type CategoryProps = {
-    id?: string | null;
     name: string;
     description?: string | null;
     is_active?: boolean;
-    created_at?: Date;
 }
 
 export type CategoryCreateCommand = Pick<CategoryProps, "name" | "description" | "is_active">
 
-export class Category {
-    public id?: string | null;
+export class Category extends EntityAbstract<CategoryProps>{
     public name: string;
     public description?: string | null;
     public is_active: boolean;
-    public created_at: Date;
 
-    constructor(props: CategoryProps){
-        this.id = props.id ?? randomUUID();
+    constructor(props: CategoryProps) {
+        super(props);
+
         this.name = props.name;
         this.description = props.description ?? null;
         this.is_active = props.is_active ?? true;
-        this.created_at = props.created_at ?? new Date();
     }
 
     static create(props: CategoryCreateCommand) {
