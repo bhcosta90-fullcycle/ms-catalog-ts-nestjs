@@ -7,7 +7,7 @@ export type CategoryProps = {
     is_active?: boolean;
 }
 
-export type CategoryCreateCommand = Pick<CategoryProps, "name" | "description" | "is_active">
+export type CategoryCreateCommand = CategoryProps
 
 export class Category extends EntityAbstract<CategoryProps>{
     private _name: string;
