@@ -9,14 +9,14 @@ export class UniqueId extends ValueObjectAbstract {
 
     private validate() {
         if (!validateUuid(this.value)) {
-            throw new InvalidUuidError("ID", "must be a valid UUID");
+            throw new InvalidUuidError("ID");
         }
     }
 }
 
 export class InvalidUuidError extends Error {
-    constructor(field: string, message: string) {
-        super(`${field} ${message}`);
+    constructor(field: string) {
+        super(`${field} must be a valid UUID`);
         this.name = "InvalidUuidError";
     }
 }
