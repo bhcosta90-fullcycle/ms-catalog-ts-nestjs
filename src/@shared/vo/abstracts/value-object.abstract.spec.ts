@@ -1,4 +1,4 @@
-import { ValueObjectAbstract } from '../value-object.abstract';
+import { ValueObjectAbstract } from './value-object.abstract';
 
 describe("ValueObject Unit Test", () => {
     it("should set value", () => {

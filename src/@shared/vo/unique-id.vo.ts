@@ -1,5 +1,5 @@
 import {v4 as uuid, validate as validateUuid} from "uuid";
-import {ValueObjectAbstract} from "./value-object.abstract";
+import {ValueObjectAbstract} from "./abstracts/value-object.abstract";
 
 export class UniqueId extends ValueObjectAbstract {
     protected _id: string;

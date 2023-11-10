@@ -1,4 +1,4 @@
-import {deepFreeze} from "../utils/object";
+import {deepFreeze} from "../../utils/object";
 
 export abstract class ValueObjectAbstract<Value = any> {
     protected _value: Value
