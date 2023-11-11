@@ -1,6 +1,7 @@
 import {EntityAbstract, EntityProps} from "../../@shared/domains/entity.abstract";
 import {CategoryValidatorFactory} from "./category.validator";
 import {EntityValidationError} from "../../@shared/domains/validators/validation.error";
+import {CategoryFakeBuilder} from "./category-fake.builder";
 
 export type CategoryProps = {
     name: string;
@@ -76,5 +77,9 @@ export class Category extends EntityAbstract<CategoryProps>{
         if (!isValid) {
             throw new EntityValidationError(validator.errors);
         }
+    }
+
+    static fake() {
+        return CategoryFakeBuilder;
     }
 }
