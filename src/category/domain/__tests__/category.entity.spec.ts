@@ -1,5 +1,5 @@
 import {Category} from "../category.entity";
-import {UniqueId} from "../../@shared/domains/vo/unique-id.vo";
+import {UniqueId} from "../../../@shared/domains/vo/unique-id.vo";
 
 describe("Category Unit Test", () => {
     describe("Constructor", () => {
@@ -65,8 +65,8 @@ describe("Category Unit Test", () => {
                 name: 'testing',
                 is_active: false,
                 id: '1495f958-7fda-11ee-b962-0242ac120002',
-                created_at: '2020-01-01 00:00:00',
-                updated_at: '2020-01-02 00:00:00',
+                created_at: new Date('2020-01-01 00:00:00'),
+                updated_at: new Date('2020-01-02 00:00:00'),
             };
 
             const $category: Category = new Category(arrange);
