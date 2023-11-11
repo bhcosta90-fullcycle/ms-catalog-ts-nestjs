@@ -1,7 +1,7 @@
-import {InMemoryRepository, InMemorySearchRepository} from "../../../@shared/infra/db/in-memory.repository";
-import {Category} from "../../domain/category.entity";
-import {UniqueId} from "../../../@shared/domains/vo/unique-id.vo";
-import {SortDirection} from "../../../@shared/domains/repositories/search-params";
+import {InMemoryRepository, InMemorySearchRepository} from "../../../../@shared/infra/db/in-memory.repository";
+import {Category} from "../../../domain/category.entity";
+import {UniqueId} from "../../../../@shared/domains/vo/unique-id.vo";
+import {SortDirection} from "../../../../@shared/domains/repositories/search-params";
 
 export class CategoryInMemoryRepository extends InMemorySearchRepository<Category, UniqueId> {
     sortableFields: string[] = ["name", "created_at"];
