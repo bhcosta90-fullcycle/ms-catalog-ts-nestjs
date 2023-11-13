@@ -31,8 +31,10 @@ export class CategoryModel extends Model<CategoryModelProps> {
     declare is_active: boolean;
 
     @Column({ allowNull: false, type: DataType.DATE(3) })
+    /* c8 ignore next */
     declare created_at: Date;
 
     @Column({ allowNull: false, type: DataType.DATE(3) })
+    /* c8 ignore next */
     declare updated_at: Date;
 }
