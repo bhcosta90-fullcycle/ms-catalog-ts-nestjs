@@ -22,8 +22,8 @@ describe("Entity Unit Tests", () => {
         const entity = new StubEntity(arrange);
         expect(entity.toJSON()).toStrictEqual({
             id: entity.id.toString(),
-            created_at: entity.created_at.toString(),
-            updated_at: entity.updated_at.toString(),
+            created_at: entity.created_at,
+            updated_at: entity.updated_at,
             ...arrange,
         });
     });

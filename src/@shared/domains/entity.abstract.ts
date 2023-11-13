@@ -28,8 +28,8 @@ export abstract class EntityAbstract<PropsConstructor = any> implements EntityIn
     toJSON(): Required<{ id: UniqueId, created_at: string, updated_at: string } & PropsConstructor> {
         return {
             id: this.id.toString(),
-            created_at: this.created_at.toString(),
-            updated_at: this.updated_at.toString(),
+            created_at: this.created_at,
+            updated_at: this.updated_at,
             ...this.props
         } as Required<{ id: UniqueId, created_at: string, updated_at: string } & PropsConstructor>
     }
